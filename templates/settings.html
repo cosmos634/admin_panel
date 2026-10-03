@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}
+Setting | Admin panel
+{% endblock %}
+
+{% block content %}
+	<div class="settings-page">
+		
+		<div class="page-header">
+			<div>
+				<h1>Settings</h1>
+				<p>Manage your account and dashboard settings</p>
+			</div>
+		</div>
+		
+		<!-- ACCOUNT -->
+		
+		<section class="settings-card">
+			
+			<div class="settings-title">
+				<div class="settings-icon">@</div>
+				<div>
+					<h2>Account</h2>
+					<p>Manage your profile information</p>
+				</div>
+			</div>
+			
+			<div class="settings-form">
+				
+				<div class="input-group">
+					<label>Username</label>
+					<input type="text" value="@cosm_0s"/>
+				</div>
+				
+				<div class="input-group">
+					<label>Display name</label>
+					<input type="text" value="CosmOS"/>
+				</div>
+				
+				<div class="input-group full">
+					<label>Bio</label>
+					<textarea>Creative video editor & content creator. Turning ideas into visual stories.</textarea>
+				</div>
+				
+				<div class="input-group">
+					<label>Email</label>
+					<input type="email"value="example@gmail.com"/>
+				</div>
+				
+			</div>
+			
+			<button class="save-btn">Save changes</button>
+			
+		</section>
+		
+		<!-- NOTIFICATIONS -->
+		
+		<section class="settings-card">
+			
+			<div class="settings-title">
+				<div class="settings-icon">N</div>
+				<div>
+					<h2>Notifications</h2>
+					<p>Choose what notifications you receive.</p>
+				</div>
+			</div>
+			
+			<div class="setting-row">
+				<div>
+					<h3>New followers</h3>
+					<p>Notify me when someone follows the account.</p>
+				</div>
+				
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span></span>
+				</label>
+			</div>
+			
+			<div class="setting-row">
+				<div>
+					<h3>Comments</h3>
+					<p>Notify me about new comments.</p>
+				</div>
+				
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span></span>
+				</label>
+			</div>
+			
+			<div class="setting-row">
+				<div>
+					<h3>Automation</h3>
+					<p>Receive automation activity notifications.</p>
+				</div>
+				
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span></span>
+				</label>
+			</div>
+			
+		</section>
+		
+		<!-- AUTOMATION -->
+		
+		<section class="settings-card">
+			
+			<div class="settings-title">
+				<div>
+					<h2>Automation</h2>
+					<p>Control your automation preferences.</p>
+				</div>
+			</div>
+			
+			<div class="settings-row">
+				<div>
+					<h3>Automation status</h3>
+					<p>Enable or disable automated actions.</p>
+				</div>
+				
+				<label class="switch">
+					<input type="checkbox" checked>
+					<!--<span></span>-->
+				</label>
+			</div>
+			
+			<div class="input-group">
+				<label>Action limit per day</label>
+				<input type="number" value"100">
+			</div>
+			
+			<div class="input-group">
+				<label>Automation delay (seconds)</label>
+				<input type="number" value="5"/>
+			</div>
+			
+		</section>
+		
+		<!-- SECURITY -->
+		
+		<section class="settings-card">
+		
+			<div class="settings-title">
+				<div class="settings-icon">S</div>
+				<h2>Security</h2>
+				<p>keep your account secure.</p>
+			</div>
+			
+			<button class="action-btn">
+				Change password
+				<span></span>
+			</button>
+			
+			<button class="action-btn">
+				Active sessions
+				<span></span>
+			</button>
+			
+			<button class="action-btn">
+				Login history
+				<span></span>
+			</button>
+			
+			<button class="danger-btn">
+				Logout from all devices
+			</button>
+		
+		</section>
+		
+		<!-- INSTAGRAM -->
+		
+		<section class="settings-card">
+			
+			<div class="settings-title">
+				<div class="settings-icon">I</div>
+				<div>
+					<h2>Instagram Account</h2>
+					<p>Manage your connected account.</p>
+				</div>
+			</div>
+			
+			<div class="connected-account">
+				
+				<div class="account-info">
+					<div class="account-avatar">
+						
+					</div>
+					<div>
+						<h3>@cosm_0s</h3>
+						<p>
+							<span class="status-dot"></span>
+							Connected
+						</p>
+					</div>
+				</div>
+				
+				<button class="disconnect-btn">
+					Disconnect
+				</button>
+				
+			</div>
+			
+		</section>
+		
+		<!-- DATA -->
+		
+		<section class="settings-card">
+		
+			<div class="settings-title">
+				<div class="settings-icon">D</div>
+				<div>
+					<h2>Data</h2>
+					<p>Manage your account data.</p>
+				</div>
+			</div>
+			
+			<button class="action-btn">
+				Export data
+				<span>--></span>
+			</button>
+			
+			<button class="action-btn">
+				Change activy logs
+				<span>--></span>
+			</button>
+			
+			<button class="action-btn">
+				Delete logs
+				<span>--></span>
+			</button>
+			
+		</section>
+				
+</div>
+{% endblock %}
+

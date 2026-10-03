@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>
+        {% block title %}Instagram Panel{% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    />
+
+</head>
+
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            ADMIN<span>PANEL</span>
+        </div>
+
+        <!-- MENYU -->
+
+        <nav class="nav" id="nav">
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('automation') }}">
+                Automation
+            </a>
+
+            <a href="{{ url_for('settings') }}">
+                Settings
+            </a>
+
+        </nav>
+
+
+        <div class="profile">
+            J
+        </div>
+
+
+        <button
+            class="menu-btn"
+            id="menuBTN"
+            onclick="toggleMenu()"
+        >
+            =
+        </button>
+
+    </header>
+
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+
+</html>

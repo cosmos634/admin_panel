@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-card">
+
+    <!-- PROFILE IMAGE -->
+
+    <div class="avatar">
+        <img src="{{ url_for('static', filename='assets/photo.jpg') }}" alt="Profile photo"/>
+    </div>
+
+    <!-- PROFILE INFO -->
+
+    <div class="profile-info">
+
+        <div class="username">
+            @cosm_0s
+            <span class="verified">OK</span>
+        </div>
+
+        <div class="name">
+            CosmOS
+        </div>
+
+        <div class="bio">
+            Creative video editor & content creator.
+            Turning ideas intro visual stories.
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>248</strong>
+                <span>Posts</span>
+            </div>
+
+            <div class="stat">
+                <strong>12.8K</strong>
+                <span>Followers</span>
+            </div>
+
+            <div class="stat">
+                <strong>384</strong>
+                <span>Following</span>
+            </div>
+
+        </div>
+
+        <button class="edit-btn">
+            Edit profile
+        </button>
+
+    </div>
+
+</div>
+
+
+<main class="container">
+
+    <h1 class="page-title">Posts</h1>
+
+    <p class="page-description">
+        Mange and view your Instagram posts
+    </p>
+
+    <!-- POSTS -->
+
+    <section class="posts">
+
+        <article class="post-card" onclick="openPost(1)">
+
+            <div class="cover">
+
+                <img
+                    src="{{ url_for('static', filename='assets/oblojka.jpg') }}"
+                    alt="Post cover"
+                />
+
+                <div class="video-icon">run</div>
+
+            </div>
+
+            <div class="post-info">
+
+                <div>
+
+                    <div class="post-number">
+                        Post #001
+                    </div>
+
+                    <h2 class="post-title">
+                        The world feels diffrenet at night
+                    </h2>
+
+                    <div class="post-date">
+                        September 28, 2026
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="stats">
+
+                        <div class="stat">
+                            <strong>124K</strong>
+                            Views
+                        </div>
+
+                        <div class="stat">
+                            <strong>9,927</strong>
+                            Likes
+                        </div>
+
+                        <div class="stat">
+                            <strong>276</strong>
+                            Comments
+                        </div>
+
+                        <div class="stat">
+                            <strong>1,842</strong>
+                            Shares
+                        </div>
+
+                    </div>
+
+                    <button class="view-post">
+                        View post
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+</main>
+
+{% endblock %}

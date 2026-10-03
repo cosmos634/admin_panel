@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}
+	about post
+{% endblock%}
+
+{% block content %}
+	<main class="container">
+	
+		<a href="{ url_for('/dashboard') }" class="back">
+			(-- Back to dashboard
+		</a>
+		
+		<div class="page-title">
+			<h1>Post Details</h1>
+			<p>View detailed information and performance of this post.</p>
+		</div>
+		
+		<!-- POST -->
+		
+		<section class="post-main">
+			
+			<div class="video-box">
+				<img class="video-thumbnail" src="{{ url_for('static', filename='assets/oblojka.jpg') }}" alt="Post video"/>
+				
+				<div class="play-button">
+					P
+				</div>
+			</div>
+			
+			<div class="post-info">
+			
+				<div class="post-label">
+					Post #001
+				</div>
+				
+				<h2>
+					The world feels different at night
+				</h2>
+				
+				<div class="date">
+					September 28, 2026
+				</div>
+				
+				<p class="caption">
+					The world feels differentat night.
+					Everything becomes quieter, darker and somehow more alive.
+				</p>
+				
+				<span class="post-status">
+					/ published
+				</span>
+				
+				<div class="actions">
+					<a href="#" class="btn primary">Edit</a>
+					<a href="#" class="btn">Open Instagram</a>
+				</div>
+				
+			</div>
+				
+		</section>
+		
+		<!-- STATISTICS -->
+		
+		<div class="section-title">
+			<h2>Performance</h2>
+			<p>Post engagment and reach statistics.</p>
+		</div>
+		
+		<section class="stats-grid">
+			
+			<div class="stat-card">
+				<div class="stat-icon">V</div>
+				<div class="stat-value">124K</div>
+				<div class="stat-name">Views</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">L</div>
+				<div class="stat-value">54K</div>
+				<div class="stat-name">Likes</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">C</div>
+				<div class="stat-value">4K</div>
+				<div class="stat-name">comments</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">SH</div>
+				<div class="stat-value">86K</div>
+				<div class="stat-name">Shares</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">S</div>
+				<div class="stat-value">12K</div>
+				<div class="stat-name">Save</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">R</div>
+				<div class="stat-value">14K</div>
+				<div class="stat-name">Reach</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">Pv</div>
+				<div class="stat-value">15K</div>
+				<div class="stat-name">Profile Visits</div>
+			</div>
+			
+			<div class="stat-card">
+				<div class="stat-icon">NF</div>
+				<div class="stat-value">4K</div>
+				<div class="stat-name">New Followers</div>
+			</div>
+			
+		</section>
+		
+		<!-- GRAPH -->
+		
+		<div class="section-title">
+			<h2>Views Overview</h2>
+			<p>Post performance over time.</p>
+		</div>
+		
+		<section class="graph-card">
+			
+			<div>
+				<strong>124k Views</strong>
+			</div>
+			
+			<div class="fake-graph">
+				
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+				
+			</div>
+			
+			<small style="color: #77777f">
+				Sep 28 &nbsp; Sep 29 &nbsp; Sep 30 &nbsp;&nbsp; Oct 1
+			</small>
+			
+		</section>
+		
+		<!-- MORE INFORMATION -->
+		
+		<div class="section-title">
+			<h2>Post Informance</h2>
+			<p>Additional information about this post.</p>
+		</div>
+		
+		<section class="extra-grid">
+		
+			<div class="info-card">
+				
+				<h3># General</h3>
+				
+				<div class="info-row">
+					<span>Post ID</span>
+					<span>#001</span>
+				</div>
+				
+				<div class="info-row">
+					<span>Account</span>
+					<span>@cosm_0s</span>
+				</div>
+				
+				<div class="info-row">
+					<span>Status</span>
+					<span>Published</span>
+				</div>
+			
+			</div>
+			
+			<div class="info-card">
+				<h3>Video</h3>
+				
+				<div class="info-row">
+					<span>Type</span>
+					<span>Reel</span>
+				</div>
+				
+				<div class="info-row">
+					<span>Duration</span>
+					<span>00:27</span>
+				</div>
+				
+				<div class="info-row">
+					<span>Format</span>
+					<span>MP4$</span>
+				</div>
+				
+				<div class="info-row">
+					<span>Resolution</span>
+					<span>1080 x 1920</span>
+				</div>
+				
+			</div>
+		
+		</section>
+			
+	</main>
+{% endblock %}
