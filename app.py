@@ -299,7 +299,8 @@ def create_app(test_config=None):
     @app.route("/view-post")
     @app.route("/view-post/<int:post_id>")
     def view_post(post_id=None):
-        return render_template("view_post.html")
+        post = Post.query.get_or_404(post_id) if post_id is not None else None
+        return render_template("view_post.html", post=post)
 
     # The scheduler is skipped for tests. In debug mode, Flask's reloader starts
     # the worker only in the reloader child process.
