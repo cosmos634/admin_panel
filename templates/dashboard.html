@@ -25,7 +25,7 @@
 
         <div class="bio">
             Creative video editor & content creator.
-            Turning ideas intro visual stories.
+            Turning ideas into visual stories.
         </div>
 
         <!-- STATS -->
@@ -51,7 +51,7 @@
 
         <button class="edit-btn">
             Edit profile
-        </button>
+        </span>
 
     </div>
 
@@ -63,14 +63,14 @@
     <h1 class="page-title">Posts</h1>
 
     <p class="page-description">
-        Mange and view your Instagram posts
+        Manage and view your Instagram posts
     </p>
 
     <!-- POSTS -->
 
     <section class="posts">
 
-        <article class="post-card" onclick="openPost(1)">
+        <a class="post-card" href="{{ url_for('view_post') }}">
 
             <div class="cover">
 
@@ -79,7 +79,7 @@
                     alt="Post cover"
                 />
 
-                <div class="video-icon">run</div>
+                <div class="video-icon">▶</div>
 
             </div>
 
@@ -92,7 +92,7 @@
                     </div>
 
                     <h2 class="post-title">
-                        The world feels diffrenet at night
+                        The world feels different at night
                     </h2>
 
                     <div class="post-date">
@@ -128,7 +128,7 @@
 
                     </div>
 
-                    <button class="view-post">
+                    <span class="view-post">
                         View post
                     </button>
 
@@ -136,7 +136,7 @@
 
             </div>
 
-        </article>
+        </a>
 
     </section>
 

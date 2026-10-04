@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}
-	about post
-{% endblock%}
+{% block title %}Post Details | Admin panel{% endblock %}
 
 {% block content %}
 	<main class="container">
 	
-		<a href="{ url_for('/dashboard') }" class="back">
-			(-- Back to dashboard
+		<a href="{{ url_for('dashboard') }}" class="back">
+			← Back to dashboard
 		</a>
 		
 		<div class="page-title">
@@ -43,17 +41,17 @@
 				</div>
 				
 				<p class="caption">
-					The world feels differentat night.
+					The world feels different at night.
 					Everything becomes quieter, darker and somehow more alive.
 				</p>
 				
 				<span class="post-status">
-					/ published
+					Published
 				</span>
 				
 				<div class="actions">
-					<a href="#" class="btn primary">Edit</a>
-					<a href="#" class="btn">Open Instagram</a>
+					<button type="button" class="btn primary" disabled>Edit</button>
+					<button type="button" class="btn" disabled>Open Instagram</button>
 				</div>
 				
 			</div>
@@ -64,7 +62,7 @@
 		
 		<div class="section-title">
 			<h2>Performance</h2>
-			<p>Post engagment and reach statistics.</p>
+			<p>Post engagement and reach statistics.</p>
 		</div>
 		
 		<section class="stats-grid">
@@ -84,7 +82,7 @@
 			<div class="stat-card">
 				<div class="stat-icon">C</div>
 				<div class="stat-value">4K</div>
-				<div class="stat-name">comments</div>
+				<div class="stat-name">Comments</div>
 			</div>
 			
 			<div class="stat-card">
@@ -96,7 +94,7 @@
 			<div class="stat-card">
 				<div class="stat-icon">S</div>
 				<div class="stat-value">12K</div>
-				<div class="stat-name">Save</div>
+				<div class="stat-name">Saves</div>
 			</div>
 			
 			<div class="stat-card">
@@ -154,7 +152,7 @@
 		<!-- MORE INFORMATION -->
 		
 		<div class="section-title">
-			<h2>Post Informance</h2>
+			<h2>Post Information</h2>
 			<p>Additional information about this post.</p>
 		</div>
 		
@@ -196,7 +194,7 @@
 				
 				<div class="info-row">
 					<span>Format</span>
-					<span>MP4$</span>
+					<span>MP4</span>
 				</div>
 				
 				<div class="info-row">
