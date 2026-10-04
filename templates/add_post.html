@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Add Post | Admin Panel{% endblock %}
+
+{% block content %}
+<main class="add-post-page">
+    <div class="add-post-header">
+        <div>
+            <h1>Add Post</h1>
+            <p>Create a draft, mark a post as published, or save it for later scheduling.</p>
+        </div>
+        <a class="add-post-back" href="{{ url_for('dashboard') }}">← Dashboard</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="form-messages">
+                {% for category, message in messages %}
+                    <div class="form-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form class="add-post-form" method="post" enctype="multipart/form-data">
+        <section class="add-post-card">
+            <div class="form-section-title">
+                <h2>Post content</h2>
+                <p>Give your post a clear title and optional description.</p>
+            </div>
+
+            <label class="form-field">
+                <span>Title <b>*</b></span>
+                <input
+                    type="text"
+                    name="title"
+                    maxlength="255"
+                    value="{{ form_data.get('title', '') }}"
+                    placeholder="Enter post title"
+                    required
+                />
+            </label>
+
+            <label class="form-field">
+                <span>Description</span>
+                <textarea
+                    name="description"
+                    rows="6"
+                    placeholder="Write a description or caption..."
+                >{{ form_data.get('description', '') }}</textarea>
+            </label>
+        </section>
+
+        <section class="add-post-card">
+            <div class="form-section-title">
+                <h2>Media</h2>
+                <p>Upload the media for this post and an optional cover image.</p>
+            </div>
+
+            <label class="upload-field">
+                <span>Media <b>* for Publish Now / Schedule</b></span>
+                <input
+                    type="file"
+                    name="media"
+                    accept="video/mp4,video/webm,video/quicktime,image/jpeg,image/png,image/webp,image/gif"
+                />
+                <small>Allowed: MP4, WebM, MOV, M4V, JPG, PNG, WEBP, GIF. Maximum 200 MB.</small>
+            </label>
+
+            <label class="upload-field">
+                <span>Cover image</span>
+                <input
+                    type="file"
+                    name="cover"
+                    accept="image/jpeg,image/png,image/webp"
+                />
+                <small>Allowed: JPG, PNG, WEBP.</small>
+            </label>
+        </section>
+
+        <section class="add-post-card">
+            <div class="form-section-title">
+                <h2>Publishing</h2>
+                <p>Choose how this post should be stored in the database.</p>
+            </div>
+
+            <div class="status-options">
+                <label class="status-option">
+                    <input type="radio" name="status" value="draft" {% if selected_status == 'draft' %}checked{% endif %} />
+                    <span>
+                        <strong>Draft</strong>
+                        <small>Save without publishing.</small>
+                    </span>
+                </label>
+
+                <label class="status-option">
+                    <input type="radio" name="status" value="published" {% if selected_status == 'published' %}checked{% endif %} />
+                    <span>
+                        <strong>Publish Now</strong>
+                        <small>Mark as published locally. No Instagram API is called.</small>
+                    </span>
+                </label>
+
+                <label class="status-option">
+                    <input type="radio" name="status" value="scheduled" {% if selected_status == 'scheduled' %}checked{% endif %} />
+                    <span>
+                        <strong>Schedule</strong>
+                        <small>Save the selected date and time. The Phase 5 scheduler is not active yet.</small>
+                    </span>
+                </label>
+            </div>
+
+            <label class="form-field scheduled-field" id="scheduledField">
+                <span>Scheduled date and time <b>* for Schedule</b></span>
+                <input
+                    type="datetime-local"
+                    name="scheduled_at"
+                    value="{{ form_data.get('scheduled_at', '') }}"
+                />
+            </label>
+        </section>
+
+        <div class="add-post-actions">
+            <a class="add-post-cancel" href="{{ url_for('dashboard') }}">Cancel</a>
+            <button class="add-post-submit" type="submit">Create Post</button>
+        </div>
+    </form>
+</main>
+
+<script>
+(function () {
+    const options = document.querySelectorAll('input[name="status"]');
+    const scheduledField = document.getElementById('scheduledField');
+    const scheduledInput = scheduledField.querySelector('input');
+
+    function updateScheduleField() {
+        const selected = document.querySelector('input[name="status"]:checked');
+        const isScheduled = selected && selected.value === 'scheduled';
+        scheduledField.classList.toggle('is-visible', isScheduled);
+        scheduledInput.required = isScheduled;
+    }
+
+    options.forEach(option => option.addEventListener('change', updateScheduleField));
+    updateScheduleField();
+})();
+</script>
+{% endblock %}
