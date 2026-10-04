@@ -7,7 +7,10 @@
     <!-- PROFILE IMAGE -->
 
     <div class="avatar">
-        <img src="{{ url_for('static', filename='assets/photo.jpg') }}" alt="Profile photo"/>
+        <img
+            src="{{ url_for('static', filename=account.avatar) if account and account.avatar else url_for('static', filename='assets/photo.jpg') }}"
+            alt="Profile photo"
+        />
     </div>
 
     <!-- PROFILE INFO -->
@@ -15,17 +18,16 @@
     <div class="profile-info">
 
         <div class="username">
-            @cosm_0s
+            @{{ account.username if account else 'cosm_0s' }}
             <span class="verified">OK</span>
         </div>
 
         <div class="name">
-            CosmOS
+            {{ account.display_name if account else 'CosmOS' }}
         </div>
 
         <div class="bio">
-            Creative video editor & content creator.
-            Turning ideas into visual stories.
+            {{ account.bio if account and account.bio else 'Creative video editor & content creator.' }}
         </div>
 
         <!-- STATS -->
@@ -33,17 +35,17 @@
         <div class="stats">
 
             <div class="stat">
-                <strong>248</strong>
+                <strong>{{ account.posts_count if account else 0 }}</strong>
                 <span>Posts</span>
             </div>
 
             <div class="stat">
-                <strong>12.8K</strong>
+                <strong>{{ account.followers|compact_number if account else 0 }}</strong>
                 <span>Followers</span>
             </div>
 
             <div class="stat">
-                <strong>384</strong>
+                <strong>{{ account.following|compact_number if account else 0 }}</strong>
                 <span>Following</span>
             </div>
 
@@ -51,7 +53,7 @@
 
         <button class="edit-btn">
             Edit profile
-        </span>
+        </button>
 
     </div>
 
@@ -70,73 +72,86 @@
 
     <section class="posts">
 
-        <a class="post-card" href="{{ url_for('view_post') }}">
+        {% if posts %}
+            {% for post in posts %}
+            <a class="post-card" href="{{ url_for('view_post', post_id=post.id) }}">
 
-            <div class="cover">
+                <div class="cover">
 
-                <img
-                    src="{{ url_for('static', filename='assets/oblojka.jpg') }}"
-                    alt="Post cover"
-                />
+                    <img
+                        src="{{ url_for('static', filename=post.cover_path) if post.cover_path else url_for('static', filename='assets/oblojka.jpg') }}"
+                        alt="Post cover"
+                    />
 
-                <div class="video-icon">▶</div>
+                    <div class="video-icon">▶</div>
 
-            </div>
+                </div>
 
-            <div class="post-info">
+                <div class="post-info">
 
-                <div>
+                    <div>
 
-                    <div class="post-number">
-                        Post #001
+                        <div class="post-number">
+                            Post #{{ "%03d"|format(post.id) }}
+                        </div>
+
+                        <h2 class="post-title">
+                            {{ post.title }}
+                        </h2>
+
+                        <div class="post-date">
+                            {{ post.updated_at.strftime("%B %d, %Y") if post.updated_at else "" }}
+                        </div>
+
                     </div>
 
-                    <h2 class="post-title">
-                        The world feels different at night
-                    </h2>
 
-                    <div class="post-date">
-                        September 28, 2026
+                    <div>
+
+                        <div class="stats">
+
+                            <div class="stat">
+                                <strong>{{ post.statistics.views|compact_number if post.statistics else 0 }}</strong>
+                                Views
+                            </div>
+
+                            <div class="stat">
+                                <strong>{{ post.statistics.likes|compact_number if post.statistics else 0 }}</strong>
+                                Likes
+                            </div>
+
+                            <div class="stat">
+                                <strong>{{ post.statistics.comments|compact_number if post.statistics else 0 }}</strong>
+                                Comments
+                            </div>
+
+                            <div class="stat">
+                                <strong>{{ post.statistics.shares|compact_number if post.statistics else 0 }}</strong>
+                                Shares
+                            </div>
+
+                        </div>
+
+                        <span class="view-post">
+                            View post
+                        </span>
+
                     </div>
 
                 </div>
 
-
-                <div>
-
-                    <div class="stats">
-
-                        <div class="stat">
-                            <strong>124K</strong>
-                            Views
-                        </div>
-
-                        <div class="stat">
-                            <strong>9,927</strong>
-                            Likes
-                        </div>
-
-                        <div class="stat">
-                            <strong>276</strong>
-                            Comments
-                        </div>
-
-                        <div class="stat">
-                            <strong>1,842</strong>
-                            Shares
-                        </div>
-
+            </a>
+            {% endfor %}
+        {% else %}
+            <div class="post-card empty-state">
+                <div class="post-info">
+                    <div>
+                        <h2 class="post-title">No posts yet</h2>
+                        <div class="post-date">Your database does not contain any posts.</div>
                     </div>
-
-                    <span class="view-post">
-                        View post
-                    </span>
-
                 </div>
-
             </div>
-
-        </a>
+        {% endif %}
 
     </section>
 

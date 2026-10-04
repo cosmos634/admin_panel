@@ -1,7 +1,10 @@
 from flask import Flask, render_template
 import os
 
-from models import db
+from sqlalchemy import func
+from sqlalchemy.orm import joinedload
+
+from models import Account, Post, PostStatistics, db
 
 
 def create_app():
@@ -17,23 +20,57 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    @app.template_filter("compact_number")
+    def compact_number(value):
+        if value is None:
+            return "0"
+        value = int(value)
+        if value >= 1_000_000:
+            number = value / 1_000_000
+            return f"{number:.1f}".rstrip("0").rstrip(".") + "M"
+        if value >= 1_000:
+            number = value / 1_000
+            return f"{number:.1f}".rstrip("0").rstrip(".") + "K"
+        return f"{value:,}"
+
     @app.route("/")
     @app.route("/dashboard")
     def dashboard():
-        account = {
-            "username": "cosm_0s",
-            "name": "CosmOS",
-            "followers": 9000000,
-            "following": 0,
-            "posts_count": 48,
-        }
+        account = Account.query.order_by(Account.id.asc()).first()
 
-        posts = [
-            {"title": "Post #1", "views": "100000", "likes": "99977", "comments": "9276", "shares": "9275"},
-            {"title": "Post #2", "views": "100000", "likes": "97007", "comments": "976", "shares": "975"},
-        ]
+        posts = []
+        total_views = total_likes = total_comments = total_shares = 0
 
-        return render_template("dashboard.html", account=account, posts=posts)
+        if account:
+            posts = (
+                Post.query.options(joinedload(Post.statistics))
+                .filter_by(account_id=account.id)
+                .order_by(Post.updated_at.desc(), Post.created_at.desc())
+                .all()
+            )
+
+            totals = (
+                db.session.query(
+                    func.coalesce(func.sum(PostStatistics.views), 0),
+                    func.coalesce(func.sum(PostStatistics.likes), 0),
+                    func.coalesce(func.sum(PostStatistics.comments), 0),
+                    func.coalesce(func.sum(PostStatistics.shares), 0),
+                )
+                .outerjoin(Post, PostStatistics.post_id == Post.id)
+                .filter(Post.account_id == account.id)
+                .one()
+            )
+            total_views, total_likes, total_comments, total_shares = totals
+
+        return render_template(
+            "dashboard.html",
+            account=account,
+            posts=posts,
+            total_views=total_views,
+            total_likes=total_likes,
+            total_comments=total_comments,
+            total_shares=total_shares,
+        )
 
     @app.route("/automation")
     def automation():
@@ -44,7 +81,8 @@ def create_app():
         return render_template("settings.html")
 
     @app.route("/view-post")
-    def view_post():
+    @app.route("/view-post/<int:post_id>")
+    def view_post(post_id=None):
         return render_template("view_post.html")
 
     return app
