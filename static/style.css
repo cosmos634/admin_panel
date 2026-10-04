@@ -494,25 +494,29 @@ body {
 }
 
 
+/* POSTS CARD */
+
 .post-card {
-    display: flex;
-    align-items: stretch;
+    width: 100%;
     min-width: 0;
-    text-decoration: none;
-    gap: 20px;
-    min-height: 190px;
-    padding: 16px;
+    min-height: 420px;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     color: inherit;
+    text-decoration: none;
 
-    border: 1px solid rgba(255, 255, 255, 0.16);
-
-    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(35, 20, 53, 0.72),
-            rgba(9, 15, 17, 0.78)
+            rgba(40, 24, 58, 0.78),
+            rgba(13, 22, 25, 0.86)
         );
 
     backdrop-filter: blur(14px);
@@ -521,307 +525,329 @@ body {
     cursor: pointer;
 
     transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
 .post-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-1px);
 
-    border-color: rgba(130, 90, 255, 0.65);
+    border-color: rgba(139, 92, 255, 0.45);
 
-    box-shadow:
-        0 14px 40px rgba(95, 50, 180, 0.18);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(46, 28, 66, 0.84),
+            rgba(14, 24, 28, 0.90)
+        );
+
+    box-shadow: 0 12px 35px rgba(70, 40, 130, 0.14);
+}
+
+.post-card:focus-visible {
+    outline: 2px solid rgba(53, 217, 255, 0.75);
+    outline-offset: 3px;
 }
 
 
 /* COVER */
 
-.cover {
-    width: 148px;
-    min-width: 148px;
-    height: 158px;
+.post-card .cover {
+    width: 96px;
+    min-width: 96px;
+    height: 60px;
 
-    overflow: hidden;
     flex-shrink: 0;
-    border-radius: 18px;
+    overflow: hidden;
 
     position: relative;
 
+    border-radius: 10px;
     background: #171717;
 }
 
-.cover img {
-    height: 100%;
+.post-card .cover img {
+    display: block;
+
     width: 100%;
+    height: 100%;
 
     object-fit: cover;
-
-    display: block;
 }
 
+.post-card .video-icon {
+    left: 7px;
+    bottom: 7px;
 
-/* VIDEO BELGISI */
+    width: 26px;
+    height: 26px;
 
-.video-icon {
-    position: absolute;
-
-    left: 12px;
-    bottom: 12px;
-
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(0, 0, 0, 0.7);
-
-    font-size: 15px;
+    font-size: 11px;
 }
 
 
 /* POST INFO */
 
-.post-info {
-    flex: 1;
+.post-card .post-info {
+    min-width: 0;
 
     display: flex;
-
     flex-direction: column;
-
-    justify-content: space-between;
-
-    min-width: 0;
+    gap: 14px;
 }
 
+.post-card .post-number {
+    margin-bottom: 6px;
 
-/* POST NUMBER */
-
-.post-number {
     color: #7658ff;
-
     font-size: 13px;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
+    font-weight: 600;
 }
 
-
-/* POST TITLE */
-
-.post-title {
-    font-size: 20px;
-    line-height: 1.3;
+.post-card .post-title {
     min-width: 0;
+    max-width: 100%;
 
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 
-    white-space: nowrap;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
 
+    white-space: normal;
     overflow: hidden;
 
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    overflow-wrap: anywhere;
 }
 
-
-/* POST DATE */
-
-.post-date {
-    color: #777;
-
+.post-card .post-date {
+    color: #85858f;
     font-size: 13px;
+    line-height: 1.4;
 }
 
 
 /* POST STATS */
 
-.post-info .stats {
+.post-card .stats {
+    width: 100%;
+
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
 
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
-
-    margin-top: 14px;
+    margin-top: 0;
 }
 
-.post-info .stat {
-    color: #999;
+.post-card .stat {
+    min-width: 0;
 
-    font-size: 13px;
+    color: #9999a5;
+    font-size: 12px;
+    line-height: 1.35;
 
     text-align: left;
 }
 
-.post-info .stat strong {
+.post-card .stat strong {
     display: block;
 
-    color: white;
-
-    font-size: 15px;
-
     margin-bottom: 2px;
+
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 
-/* VIEW BUTTON */
+/* VIEW POST */
 
-.view-post {
-    margin-top: 12px;
-
+.post-card .view-post {
+    display: block;
     width: 100%;
 
+    margin-top: auto;
     padding: 9px 14px;
 
-    border-radius: 12px;
+    border: 1px solid rgba(155, 100, 255, 0.42);
+    border-radius: 10px;
 
-    border:
-        1px solid rgba(155, 100, 255, 0.5);
+    color: #ffffff;
+    background: rgba(80, 45, 130, 0.18);
 
-    background:
-        rgba(80, 45, 130, 0.2);
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
 
-    color: #fff;
-
-    cursor: pointer;
-
-    transition: 0.2s;
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease;
 }
 
 .post-card:hover .view-post {
-    background:
-        rgba(100, 60, 180, 0.4);
+    background: rgba(100, 60, 180, 0.30);
+    border-color: rgba(155, 100, 255, 0.58);
 }
 
 
-/* ================= MOBILE ================= */
+/* TABLET: 768px–1023px */
 
-@media (max-width: 700px) {
-
-    .container {
-        width: calc(100% - 24px);
-
-        margin: 35px auto;
-    }
-
-    .page-title {
-        font-size: 28px;
-    }
-
-    .page-description {
-        font-size: 14px;
-
-        margin-bottom: 25px;
-    }
-
-    .posts {
-        width: 100%;
-
-        grid-template-columns: 1fr;
-
-        gap: 16px;
-    }
+@media (min-width: 768px) and (max-width: 1023px) {
 
     .post-card {
+        min-height: 0;
+        padding: 20px;
+        border-radius: 16px;
         gap: 12px;
-        padding: 12px;
-        min-height: 150px;
     }
 
-    .cover {
-        width: 105px;
-        min-width: 105px;
-        height: 126px;
-        border-radius: 15px;
-    }
-
-    .post-info {
-        min-width: 0;
-    }
-
-    .post-title {
-        font-size: 16px;
-
-        white-space: normal;
-
-        display: -webkit-box;
-
-        -webkit-line-clamp: 2;
-
-        -webkit-box-orient: vertical;
-
-        overflow: hidden;
-    }
-
-    .post-number {
-        font-size: 11px;
-    }
-
-    .post-date {
-        font-size: 11px;
-    }
-
-    .post-info .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 6px;
-        margin-top: 8px;
-    }
-
-    .post-info .stat {
-        font-size: 10px;
-    }
-
-    .post-info .stat strong {
-        font-size: 13px;
-    }
-
-    .view-post {
-        padding: 8px;
-
-        font-size: 12px;
-    }
-}
-
-
-/* SMALL PHONES */
-
-@media (max-width: 380px) {
-
-    .post-card {
-        gap: 10px;
-        padding: 10px;
-        min-height: 138px;
-    }
-
-    .cover {
+    .post-card .cover {
         width: 82px;
         min-width: 82px;
-        height: 112px;
-        border-radius: 13px;
+        height: 54px;
     }
 
-    .post-title {
+    .post-card .post-info {
+        gap: 12px;
+    }
+
+    .post-card .post-title {
         font-size: 14px;
-        line-height: 1.25;
     }
 
-    .post-info .stat strong {
+    .post-card .post-number,
+    .post-card .post-date {
         font-size: 12px;
     }
 
-    .post-info .stat {
+    .post-card .stats {
+        gap: 10px 12px;
+    }
+
+    .post-card .stat {
+        font-size: 12px;
+    }
+
+    .post-card .stat strong {
+        font-size: 13px;
+    }
+}
+
+
+/* MOBILE: 480px–767px */
+
+@media (max-width: 767px) {
+
+    .post-card {
+        width: 100%;
+        min-height: 0;
+        padding: 16px;
+        border-radius: 14px;
+        gap: 12px;
+    }
+
+    .post-card .cover {
+        width: 72px;
+        min-width: 72px;
+        height: 48px;
+        border-radius: 9px;
+    }
+
+    .post-card .video-icon {
+        left: 5px;
+        bottom: 5px;
+
+        width: 22px;
+        height: 22px;
+
         font-size: 9px;
     }
 
-    .view-post {
+    .post-card .post-info {
+        gap: 10px;
+    }
+
+    .post-card .post-number,
+    .post-card .post-date {
+        font-size: 11px;
+    }
+
+    .post-card .post-title {
+        font-size: 14px;
+        line-height: 1.35;
+    }
+
+    .post-card .stats {
+        gap: 8px 10px;
+    }
+
+    .post-card .stat {
+        font-size: 11px;
+    }
+
+    .post-card .stat strong {
+        font-size: 12px;
+    }
+
+    .post-card .view-post {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+
+/* SMALL MOBILE: max 479px */
+
+@media (max-width: 479px) {
+
+    .post-card {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .post-card .cover {
+        width: 68px;
+        min-width: 68px;
+        height: 46px;
+        border-radius: 8px;
+    }
+
+    .post-card .post-info {
+        gap: 8px;
+    }
+
+    .post-card .post-title {
+        font-size: 13px;
+        line-height: 1.35;
+    }
+
+    .post-card .post-number,
+    .post-card .post-date {
+        font-size: 10px;
+    }
+
+    .post-card .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px 8px;
+    }
+
+    .post-card .stat {
+        font-size: 10px;
+    }
+
+    .post-card .stat strong {
+        font-size: 11px;
+    }
+
+    .post-card .view-post {
+        padding: 7px 10px;
         font-size: 11px;
     }
 }
