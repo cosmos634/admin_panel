@@ -10,6 +10,7 @@ from sqlalchemy.orm import joinedload
 from werkzeug.utils import secure_filename
 
 from models import Account, Post, PostStatistics, db
+from scheduler import start_scheduler
 
 
 ALLOWED_MEDIA_EXTENSIONS = {"mp4", "webm", "mov", "m4v", "jpg", "jpeg", "png", "webp", "gif"}
@@ -59,7 +60,7 @@ def save_upload(file_storage, upload_dir):
     return destination, filename
 
 
-def create_app():
+def create_app(test_config=None):
     app = Flask(__name__)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
@@ -68,6 +69,8 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_SIZE
     app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key-change-me")
+    if test_config:
+        app.config.update(test_config)
 
     db.init_app(app)
 
@@ -297,6 +300,14 @@ def create_app():
     @app.route("/view-post/<int:post_id>")
     def view_post(post_id=None):
         return render_template("view_post.html")
+
+    # The scheduler is skipped for tests. In debug mode, Flask's reloader starts
+    # the worker only in the reloader child process.
+    if not app.testing and os.getenv("DISABLE_POST_SCHEDULER") != "1":
+        debug_enabled = os.getenv("FLASK_DEBUG", "1") == "1"
+        reloader_process = os.getenv("WERKZEUG_RUN_MAIN") == "true"
+        if not debug_enabled or reloader_process:
+            start_scheduler(app)
 
     return app
 
