@@ -74,6 +74,20 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+        # Phase 4 needs a local account to own newly created posts.
+        # Create one default account only when the database has no accounts yet.
+        if Account.query.count() == 0:
+            db.session.add(
+                Account(
+                    username="cosm_0s",
+                    display_name="CosmOS",
+                    followers=0,
+                    following=0,
+                    posts_count=0,
+                )
+            )
+            db.session.commit()
+
     @app.errorhandler(413)
     def request_entity_too_large(_error):
         flash("Uploaded file is too large. Maximum size is 200 MB.", "error")
