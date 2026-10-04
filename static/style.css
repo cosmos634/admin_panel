@@ -499,6 +499,7 @@ body {
 
 .post-card {
     display: flex;
+    text-decoration: none;
 
     gap: 22px;
 
